@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generate.StoreDao">
+  <resultMap id="BaseResultMap" type="generate.Store">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="merchant_id" jdbcType="VARCHAR" property="merchantId" />
+    <result column="delivery_start" jdbcType="TIMESTAMP" property="deliveryStart" />
+    <result column="delivery_end" jdbcType="TIMESTAMP" property="deliveryEnd" />
+    <result column="dDelivery_mode" jdbcType="INTEGER" property="ddeliveryMode" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="notice" jdbcType="VARCHAR" property="notice" />
+    <result column="distribution_fee" jdbcType="FLOAT" property="distributionFee" />
+    <result column="start_price" jdbcType="INTEGER" property="startPrice" />
+    <result column="packe_charge" jdbcType="INTEGER" property="packeCharge" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="background_image" jdbcType="VARCHAR" property="backgroundImage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, merchant_id, delivery_start, delivery_end, dDelivery_mode, address, telephone, 
+    sign, notice, distribution_fee, start_price, packe_charge, flag, longitude, latitude, 
+    background_image
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from store
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from store
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="generate.Store" useGeneratedKeys="true">
+    insert into store (`name`, merchant_id, delivery_start, 
+      delivery_end, dDelivery_mode, address, 
+      telephone, sign, notice, 
+      distribution_fee, start_price, packe_charge, 
+      flag, longitude, latitude, 
+      background_image)
+    values (#{name,jdbcType=VARCHAR}, #{merchantId,jdbcType=VARCHAR}, #{deliveryStart,jdbcType=TIMESTAMP}, 
+      #{deliveryEnd,jdbcType=TIMESTAMP}, #{ddeliveryMode,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{notice,jdbcType=VARCHAR}, 
+      #{distributionFee,jdbcType=FLOAT}, #{startPrice,jdbcType=INTEGER}, #{packeCharge,jdbcType=INTEGER}, 
+      #{flag,jdbcType=INTEGER}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, 
+      #{backgroundImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="generate.Store" useGeneratedKeys="true">
+    insert into store
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="merchantId != null">
+        merchant_id,
+      </if>
+      <if test="deliveryStart != null">
+        delivery_start,
+      </if>
+      <if test="deliveryEnd != null">
+        delivery_end,
+      </if>
+      <if test="ddeliveryMode != null">
+        dDelivery_mode,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="notice != null">
+        notice,
+      </if>
+      <if test="distributionFee != null">
+        distribution_fee,
+      </if>
+      <if test="startPrice != null">
+        start_price,
+      </if>
+      <if test="packeCharge != null">
+        packe_charge,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="backgroundImage != null">
+        background_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantId != null">
+        #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryStart != null">
+        #{deliveryStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryEnd != null">
+        #{deliveryEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddeliveryMode != null">
+        #{ddeliveryMode,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="distributionFee != null">
+        #{distributionFee,jdbcType=FLOAT},
+      </if>
+      <if test="startPrice != null">
+        #{startPrice,jdbcType=INTEGER},
+      </if>
+      <if test="packeCharge != null">
+        #{packeCharge,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="backgroundImage != null">
+        #{backgroundImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="generate.Store">
+    update store
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantId != null">
+        merchant_id = #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryStart != null">
+        delivery_start = #{deliveryStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryEnd != null">
+        delivery_end = #{deliveryEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddeliveryMode != null">
+        dDelivery_mode = #{ddeliveryMode,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="notice != null">
+        notice = #{notice,jdbcType=VARCHAR},
+      </if>
+      <if test="distributionFee != null">
+        distribution_fee = #{distributionFee,jdbcType=FLOAT},
+      </if>
+      <if test="startPrice != null">
+        start_price = #{startPrice,jdbcType=INTEGER},
+      </if>
+      <if test="packeCharge != null">
+        packe_charge = #{packeCharge,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="backgroundImage != null">
+        background_image = #{backgroundImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="generate.Store">
+    update store
+    set `name` = #{name,jdbcType=VARCHAR},
+      merchant_id = #{merchantId,jdbcType=VARCHAR},
+      delivery_start = #{deliveryStart,jdbcType=TIMESTAMP},
+      delivery_end = #{deliveryEnd,jdbcType=TIMESTAMP},
+      dDelivery_mode = #{ddeliveryMode,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      notice = #{notice,jdbcType=VARCHAR},
+      distribution_fee = #{distributionFee,jdbcType=FLOAT},
+      start_price = #{startPrice,jdbcType=INTEGER},
+      packe_charge = #{packeCharge,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      background_image = #{backgroundImage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
