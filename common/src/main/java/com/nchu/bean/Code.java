@@ -1,7 +1,8 @@
 package com.nchu.bean;
 
 public enum Code {
-    success(200);
+    success(2000),
+    error(2001);
 
     private int code;
 

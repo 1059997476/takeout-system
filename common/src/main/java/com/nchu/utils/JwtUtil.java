@@ -1,7 +1,5 @@
-package com.nchu.util;
+package com.nchu.utils;
 
-import com.nchu.execption.JwtException;
-import com.nchu.model.UserInfo;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
@@ -15,7 +13,7 @@ import java.util.Date;
 
 public class JwtUtil {
 
-    public static long expire=6000L;
+    public static long expire=6000000L;
 
     public static String secret = "hahhahahahahhahaaheheheheheheheheyhehyheyhehy";
 
@@ -25,14 +23,13 @@ public class JwtUtil {
      * subject代表token所有者，用userId作为subject
      * @return
      */
-    public static String genToken(int type,String username) throws JOSEException {
+    public static String genToken(Integer type,String username) throws JOSEException {
         // 生成jwt的header
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
 
 
         //生产payload部分
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                .issuer("www.demo")
                 .expirationTime(new Date(System.currentTimeMillis()+expire)) //设置超时时间
                 .claim("username",username) //设置payload中的公共属性
                 .claim("type",type)
@@ -75,8 +72,8 @@ public class JwtUtil {
         //拿到代表subject的userid
         JWTClaimsSet payload = jwt.getJWTClaimsSet();
         //拿公共属性 username
-        String username = (String) payload.getClaim("username");
-        Integer type = (Integer) payload.getClaim("type");
+        String username =  payload.getStringClaim("username");
+        Integer type = payload.getIntegerClaim("type");
         UserInfo userInfo = new UserInfo();
         userInfo.setType(type);
         userInfo.setUsername(username);

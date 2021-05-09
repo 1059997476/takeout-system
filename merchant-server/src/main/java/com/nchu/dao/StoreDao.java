@@ -1,6 +1,5 @@
 package com.nchu.dao;
 
-
 import com.nchu.bean.Store;
 
 public interface StoreDao {

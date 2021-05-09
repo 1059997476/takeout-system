@@ -1,4 +1,4 @@
-package com.nchu.model;
+package com.nchu.utils;
 
 import lombok.Data;
 

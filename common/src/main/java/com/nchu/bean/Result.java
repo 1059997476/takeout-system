@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-
 public class Result<T> {
     private T data;
     private String msg;
@@ -15,4 +14,5 @@ public class Result<T> {
         this.msg = msg;
         this.code = code;
     }
+
 }

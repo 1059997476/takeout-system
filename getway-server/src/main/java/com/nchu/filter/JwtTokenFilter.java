@@ -32,10 +32,10 @@ public class JwtTokenFilter implements GatewayFilter, Ordered {
             return chain.filter(exchange.mutate()
                     .request(exchange.getRequest().mutate()
                             .header("username", userInfo.getUsername())
-                            .header("uid", userInfo.getId()).build())
+                            .header("type", String.valueOf(userInfo.getType())).build())
                     .build()).then(Mono.fromRunnable(() -> {
                         try {
-                            String newToken = JwtUtil.genToken(userInfo.getId(), userInfo.getUsername());
+                            String newToken = JwtUtil.genToken(userInfo.getType(),userInfo.getUsername());
                             exchange.getResponse().getHeaders().set("access-token",newToken);
                         } catch (JOSEException e) {
                             e.printStackTrace();
