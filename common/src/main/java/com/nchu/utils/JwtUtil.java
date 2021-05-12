@@ -13,9 +13,9 @@ import java.util.Date;
 
 public class JwtUtil {
 
-    public static long expire=6000000L;
+    public static long expire=1000*60*10L;
 
-    public static String secret = "hahhahahahahhahaaheheheheheheheheyhehyheyhehy";
+    public static String secret = "heheehklfdsjfkldsjfkslfjkdslfjdsf";
 
 
     /**

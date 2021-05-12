@@ -2,6 +2,9 @@ package com.nchu.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -9,12 +12,13 @@ import lombok.Data;
  * @author
  */
 @Data
+@TableName("users")
 public class User implements Serializable {
-    private String id;
 
     /**
      * 登录用户
      */
+    @TableId("username")
     private String username;
 
     /**
@@ -36,11 +40,6 @@ public class User implements Serializable {
      * 会员到期时间
      */
     private Date memberTime;
-
-    /**
-     * 生日
-     */
-    private Date birthday;
 
     /**
      * 电话

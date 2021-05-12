@@ -25,7 +25,7 @@ public class JwtTokenFilter implements GatewayFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
         //1.获取token
-        String token = exchange.getRequest().getHeaders().getFirst("access-token");
+        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
         try {
             UserInfo userInfo = JwtUtil.validToken(token);
 
@@ -36,14 +36,13 @@ public class JwtTokenFilter implements GatewayFilter, Ordered {
                     .build()).then(Mono.fromRunnable(() -> {
                         try {
                             String newToken = JwtUtil.genToken(userInfo.getType(),userInfo.getUsername());
-                            exchange.getResponse().getHeaders().set("access-token",newToken);
+                            exchange.getResponse().getHeaders().set("Authorization",newToken);
                         } catch (JOSEException e) {
                             e.printStackTrace();
                         }
                     }
             ));
         } catch (ParseException | JOSEException | JwtException e) {
-            e.printStackTrace();
             exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
             return exchange.getResponse().setComplete();
         }

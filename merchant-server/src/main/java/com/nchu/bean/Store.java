@@ -2,12 +2,17 @@ package com.nchu.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
+import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * store
  * @author
  */
+@Accessors(chain = true)
 @Data
 public class Store implements Serializable {
     private String id;
@@ -25,17 +30,19 @@ public class Store implements Serializable {
     /**
      * 接单时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deliveryStart;
 
     /**
      * 打烊时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deliveryEnd;
 
     /**
      * 配送方式 0平台专送，1商家配送，2跑腿
      */
-    private Integer ddeliveryMode;
+    private int deliveryMode;
 
     /**
      * 店铺地址
@@ -70,12 +77,12 @@ public class Store implements Serializable {
     /**
      * 打包费用
      */
-    private Integer packeCharge;
+    private Integer packCharge;
 
     /**
      * 0表示存在，1表示删除
      */
-    private Integer flag;
+    private int flag;
 
     /**
      * 经度
@@ -89,5 +96,6 @@ public class Store implements Serializable {
 
     private String backgroundImage;
 
+    private List<Group> groups;
     private static final long serialVersionUID = 1L;
 }

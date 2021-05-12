@@ -15,9 +15,9 @@ import java.util.Date;
 
 public class JwtUtil {
 
-    public static long expire=6000L;
+    public static long expire=1000*60*10L;
 
-    public static String secret = "hahhahahahahhahaaheheheheheheheheyhehyheyhehy";
+    public static String secret = "heheehklfdsjfkldsjfkslfjkdslfjdsf";
 
 
     /**
@@ -32,7 +32,6 @@ public class JwtUtil {
 
         //生产payload部分
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                .issuer("www.demo")
                 .expirationTime(new Date(System.currentTimeMillis()+expire)) //设置超时时间
                 .claim("username",username) //设置payload中的公共属性
                 .claim("type",type)
@@ -75,13 +74,17 @@ public class JwtUtil {
         //拿到代表subject的userid
         JWTClaimsSet payload = jwt.getJWTClaimsSet();
         //拿公共属性 username
-        String username = (String) payload.getClaim("username");
-        Integer type = (Integer) payload.getClaim("type");
+        String username = payload.getStringClaim("username");
+        Integer type =  payload.getIntegerClaim("type");
         UserInfo userInfo = new UserInfo();
         userInfo.setType(type);
         userInfo.setUsername(username);
         return userInfo;
 
+    }
+
+    public static void main(String[] args) throws JwtException, ParseException, JOSEException {
+        validToken("eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjA3MzYxNTYsInR5cGUiOjAsInVzZXJuYW1lIjoiYWRtaW4ifQ.LeFWCbXktV6Y2x_RSIkqvoCzEgwNj4RWDYrJtMAM3mU");
     }
 }
 

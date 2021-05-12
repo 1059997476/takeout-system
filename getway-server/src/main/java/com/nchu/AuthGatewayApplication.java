@@ -56,7 +56,7 @@ public class AuthGatewayApplication {
                         .uri("lb://user-server"))
                 .route(r -> r.path("/merchant/**")
                         .filters(f -> f.stripPrefix(1).filter(jwtTokenFilter()))
-                        .uri("lb://merchant-service"))
+                        .uri("lb://merchant-server"))
                 .build();
     }
 }

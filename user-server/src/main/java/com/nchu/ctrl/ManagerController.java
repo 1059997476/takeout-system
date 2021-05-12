@@ -3,7 +3,6 @@ package com.nchu.ctrl;
 import com.nchu.bean.Code;
 import com.nchu.bean.Manager;
 import com.nchu.bean.Result;
-import com.nchu.bean.User;
 import com.nchu.dao.ManagerDao;
 import com.nchu.utils.JwtUtil;
 import com.nimbusds.jose.JOSEException;
@@ -23,7 +22,7 @@ public class ManagerController {
     private PasswordEncoder passwordEncoder;
     @PostMapping("/add")
     public Result addManager(@RequestBody Manager manager){
-        Manager repeatManger = managerDao.selectByPrimaryKey(manager.getUsername());
+        Manager repeatManger = managerDao.selectById(manager.getUsername());
         if(repeatManger!=null)
             return new Result("用户已存在", Code.error.getCode());
         manager.setCreatTime(new Date());
@@ -36,7 +35,7 @@ public class ManagerController {
     @GetMapping("/login")
     public Result loginManager(Manager manager, HttpServletResponse response) throws JOSEException {
         //根据用户名来查询
-        Manager repeatManger = managerDao.selectByPrimaryKey(manager.getUsername());
+        Manager repeatManger = managerDao.selectById(manager.getUsername());
         if(repeatManger==null)
             return new Result( "用户名不存在",Code.error.getCode());
         // 判断密码是否正确
@@ -44,9 +43,9 @@ public class ManagerController {
 
         if(rs){
             String token = JwtUtil.genToken( repeatManger.getType(),repeatManger.getUsername());
-
+            response.setHeader("Authorization",token);
             //返回结果集
-            return new Result(token,"登录成功",Code.success.getCode());
+            return new Result("登录成功",Code.success.getCode());
         }
         return new Result("用户名或密码错误",Code.error.getCode());
     }

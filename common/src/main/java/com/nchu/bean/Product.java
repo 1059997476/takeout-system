@@ -35,7 +35,7 @@ public class Product implements Serializable {
     /**
      * 商品状态，0可售，1不可售
      */
-    private Integer state;
+    private Boolean state;
 
     /**
      * 商品图片

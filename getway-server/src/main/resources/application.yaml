@@ -9,7 +9,3 @@ spring:
         server-addr: localhost:8848
         username: nacos
         password: nacos
-#jwt超时时间以及sercet配置
-jwt:
-  expire: 6000000
-  secrect: hahhahahahahhahaaheheheheheheheheyhehyheyhehy

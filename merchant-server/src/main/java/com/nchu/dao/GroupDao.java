@@ -1,17 +1,9 @@
 package com.nchu.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.nchu.bean.Group;
 
-public interface GroupDao {
-    int deleteByPrimaryKey(String id);
 
-    int insert(Group record);
+public interface GroupDao extends BaseMapper<Group> {
 
-    int insertSelective(Group record);
-
-    Group selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(Group record);
-
-    int updateByPrimaryKey(Group record);
 }
