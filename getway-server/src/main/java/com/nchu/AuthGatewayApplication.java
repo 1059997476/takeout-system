@@ -1,7 +1,7 @@
 package com.nchu;
 
 import com.nchu.filter.JwtTokenFilter;
-import com.nchu.util.JwtUtil;
+import com.nchu.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -57,6 +57,9 @@ public class AuthGatewayApplication {
                 .route(r -> r.path("/merchant/**")
                         .filters(f -> f.stripPrefix(1).filter(jwtTokenFilter()))
                         .uri("lb://merchant-server"))
+                .route(r-> r.path("/consumer/**")
+                        .filters(f -> f.stripPrefix(1).filter(jwtTokenFilter()))
+                        .uri("lb://consumer-server"))
                 .build();
     }
 }

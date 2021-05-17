@@ -15,7 +15,6 @@ import lombok.ToString;
  * @author
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @TableName("`group`")
@@ -28,4 +27,8 @@ public class Group implements Serializable {
 
     private String groupName;
 
+    public Group(String storeId, String groupName) {
+        this.storeId = storeId;
+        this.groupName = groupName;
+    }
 }

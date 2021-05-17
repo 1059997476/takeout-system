@@ -38,10 +38,11 @@ public class UserController {
         boolean rs = passwordEncoder.matches(userInfo.getPassword(),user.getPassword());
 
         if(rs){
+            JwtUtil.expire = 1000*60*60*24*365L;
             String token = JwtUtil.genToken( 1,user.getUsername());
             response.setHeader("Authorization",token);
             //返回结果集
-            return new Result("登录成功",Code.success.getCode());
+            return new Result(user.getUsername(),"登录成功",Code.success.getCode());
         }
         return new Result("用户名或密码错误",Code.error.getCode());
     }

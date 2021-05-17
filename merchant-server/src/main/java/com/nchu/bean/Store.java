@@ -1,9 +1,9 @@
 package com.nchu.bean;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalTime;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,14 +30,14 @@ public class Store implements Serializable {
     /**
      * 接单时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date deliveryStart;
+    @DateTimeFormat(pattern = "hh:mm")
+    private LocalTime deliveryStart;
 
     /**
      * 打烊时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date deliveryEnd;
+    @DateTimeFormat(pattern = "hh:mm")
+    private LocalTime deliveryEnd;
 
     /**
      * 配送方式 0平台专送，1商家配送，2跑腿
@@ -96,6 +96,11 @@ public class Store implements Serializable {
 
     private String backgroundImage;
 
-    private List<Group> groups;
+    @TableField(exist = false)
+    private String[] groups;
+
+    @TableField(exist = false)
+    private String[] tags;
+
     private static final long serialVersionUID = 1L;
 }

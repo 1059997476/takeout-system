@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.dao.ReceiveAddressDao">
+  <resultMap id="BaseResultMap" type="com.nchu.bean.Address">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="linker_name" jdbcType="VARCHAR" property="linkerName" />
+    <result column="house_address" jdbcType="VARCHAR" property="houseAddress" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="gender" jdbcType="OTHER" property="gender" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="default_address" jdbcType="INTEGER" property="defaultAddress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, phone, linker_name, house_address, longitude, latitude, gender, `status`,
+    default_address
+  </sql>
+
+</mapper>

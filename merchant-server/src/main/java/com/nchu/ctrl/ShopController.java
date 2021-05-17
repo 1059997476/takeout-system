@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.nchu.bean.Code;
 import com.nchu.bean.Result;
 import com.nchu.bean.Store;
-import com.nchu.service.ShopService;
+import com.nchu.service.impl.ShopServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,15 +18,16 @@ import java.util.Map;
 @RestController
 public class ShopController {
     @Resource
-    private ShopService shopService;
+    private ShopServiceImpl shopService;
     /**
      * 增加店铺
      * @param store
      * @return
      */
     @PostMapping("/addStore")
-    public Result saveStore(@RequestBody Store store) throws IOException {
-        return shopService.insertStore(store, store.getGroups());
+    public Result saveStore(@RequestBody Store store, @RequestHeader("username")String username) throws IOException {
+        store.setMerchantId(username);
+        return shopService.insertStore(store);
     }
 
     /**
@@ -44,8 +45,8 @@ public class ShopController {
      * @param merchant_id
      * @return
      */
-    @GetMapping("/{merchant_id}")
-    public Result findStoresByMerchantId(@PathVariable String merchant_id){
+    @GetMapping("/findByMerchant")
+    public Result findStoresByMerchantId(@RequestHeader("username")String merchant_id){
         Map<String,Object> map = new HashMap<>();
         map.put("merchant_id",merchant_id);
         List<Store> stores = shopService.listByMap(map);

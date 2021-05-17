@@ -1,8 +1,8 @@
 server:
-  port: 9096
+  port: 9095
 spring:
   application:
-    name: merchant-server
+    name: consumer-server
   cloud:
     nacos:
       discovery:    #nacos注册中心相关配置
@@ -11,7 +11,7 @@ spring:
         password: nacos
   mvc:
     format:
-      date-time: yyyy-MM-dd HH:mm:ss
+      date-time: yyyy-MM-dd
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
